@@ -1,6 +1,6 @@
 # comando
 
-💂 Command as a service
+💂Command as a service
 
 ## Install
 
