@@ -49,11 +49,12 @@ func main() {
 	app.Usage = "Command as a service"
 	app.Action = func(c *cli.Context) error {
 		r := mux.NewRouter()
-		out, err := exec.Command("bash", "-c", c.String("c")).Output()
-		if err != nil {
-			return err
-		}
 		r.HandleFunc("/"+c.String("r"), func(w http.ResponseWriter, r *http.Request) {
+			out, err := exec.Command("bash", "-c", c.String("c")).Output()
+			if err != nil {
+				return err
+			}
+
 			data := map[string]string{}
 			if c.Bool("raw-output") {
 				data["output"] = string(out)
