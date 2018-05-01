@@ -22,7 +22,7 @@ Now you can go to `localhost:6000/foo` and get the output:
 { "output": "foo" }
 ```
 
-Outputs are trimmed by default with `--raw-output` outputs will be returned they were!
+Outputs are trimmed by default, with `--raw-output` outputs will be returned they were!
 
 ```
 ~ $ comando -c "echo foo" -r foo --raw-output
