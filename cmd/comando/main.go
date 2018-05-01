@@ -66,8 +66,7 @@ func main() {
 		}).Methods("GET")
 
 		addr := fmt.Sprintf("%s:%s", c.String("host"), c.String("port"))
-		return http.ListenAndServe(addr, handlers.LoggingHandler(os.Stdout, r))
-
+		http.ListenAndServe(addr, handlers.LoggingHandler(os.Stdout, r))
 		return nil
 	}
 
