@@ -48,11 +48,12 @@ func main() {
 	app.Name = "comando"
 	app.Usage = "Command as a service"
 	app.Action = func(c *cli.Context) error {
+		var err error
 		r := mux.NewRouter()
 		r.HandleFunc("/"+c.String("r"), func(w http.ResponseWriter, r *http.Request) {
 			out, err := exec.Command("bash", "-c", c.String("c")).Output()
 			if err != nil {
-				return err
+				return
 			}
 
 			data := map[string]string{}
@@ -65,6 +66,9 @@ func main() {
 			return
 		}).Methods("GET")
 
+		if err != nil {
+			return err
+		}
 		addr := fmt.Sprintf("%s:%s", c.String("host"), c.String("port"))
 		http.ListenAndServe(addr, handlers.LoggingHandler(os.Stdout, r))
 		return nil
